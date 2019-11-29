@@ -1,0 +1,35 @@
+{
+    "name": "cblink/china-pay",
+    "description": "china pay sdk",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nick",
+            "email": "i@httpd.cc"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.4",
+        "illuminate/config": "^5.0|^6.0|^7.0",
+        "monolog/monolog": "^2.0",
+        "pimple/pimple": "^3.2",
+        "symfony/cache": "^5.0",
+        "nesbot/carbon": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5|^8.4",
+        "ramsey/uuid": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cblink\\ChinaPay\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
