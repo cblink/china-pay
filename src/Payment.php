@@ -14,6 +14,11 @@ namespace Cblink\ChinaPay;
  * @property \Cblink\ChinaPay\Payment\App\Client                $app            App支付
  *
  * @method string getAccessToken()
+ * @method array|string order($type, $platform, array $params)
+ * @method array query($type, array $params)
+ * @method array close($type, array $params)
+ * @method array refund($type, array $params)
+ * @method array refundQuery($type, array $params)
  *
  * @package App\Feature\ChinaPay
  */
