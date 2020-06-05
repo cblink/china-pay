@@ -5,7 +5,7 @@ namespace Cblink\ChinaPay\Payment;
 use Carbon\Carbon;
 use Cblink\ChinaPay\Payment;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Response;
+use Cblink\ChinaPay\Payment\Exceptions\PaymentException;
 use Psr\SimpleCache\InvalidArgumentException;
 
 /**
@@ -121,25 +121,27 @@ abstract class BaseClient
      * @param $res
      * @param $content
      * @return mixed
-     * @throws Exceptions\PaymentException
+     * @throws
      */
     protected function getResponse($res, $content) :array
     {
         $data = json_decode($content, true);
 
         if($res->getStatusCode() != 200){
-            throw new Payment\Exceptions\PaymentException(sprintf('REQUEST FAIL：%s，CODE：%s', $content, $res->getStatusCode()));
-        }
-
-        // 判断是否成功
-        if(!(isset($data['errCode']) && ($data['errCode'] === "SUCCESS" || $data['errCode'] === "0000"))){
-            throw new Payment\Exceptions\PaymentException(
-                $data['errInfo'] ?? ($data['errMsg'] ?? 'REQUEST FAIL：'.$res->getStatusCode()),
-                $data['errCode'] ?? 'FAIL'
-            );
+            throw new PaymentException(sprintf('REQUEST FAIL：%s，CODE：%s', $content, $res->getStatusCode()));
         }
 
         return $data;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    protected function isSuccess($data)
+    {
+        // 判断是否成功
+        return !(isset($data['errCode']) && ($data['errCode'] === "SUCCESS" || $data['errCode'] === "0000"));
     }
 
     /**
