@@ -28,7 +28,7 @@ class Base extends BaseClient
      * @param $type
      * @param $platform
      * @param $params
-     * @return mixed
+     * @return array|string
      */
     public function order($type, $platform, array $params)
     {
@@ -44,7 +44,7 @@ class Base extends BaseClient
     /**
      * @param $type
      * @param $params
-     * @return mixed
+     * @return array
      */
     public function query($type, $params)
     {
@@ -54,7 +54,7 @@ class Base extends BaseClient
     /**
      * @param $type
      * @param $params
-     * @return mixed
+     * @return array
      */
     public function close($type, $params)
     {
@@ -64,7 +64,7 @@ class Base extends BaseClient
     /**
      * @param $type
      * @param $params
-     * @return mixed
+     * @return array
      */
     public function refund($type, $params)
     {
@@ -74,7 +74,7 @@ class Base extends BaseClient
     /**
      * @param $type
      * @param $params
-     * @return mixed
+     * @return array
      */
     public function refundQuery($type, $params)
     {
