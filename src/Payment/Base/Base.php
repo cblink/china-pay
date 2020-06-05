@@ -34,8 +34,8 @@ class Base extends BaseClient
     {
         $instance = $this->getInstance($type);
 
-        if (!method_exists($instance, $type)) {
-            throw new InvalidArgumentException(sprintf('%s is not defined', $type));
+        if (!method_exists($instance, $platform)) {
+            throw new InvalidArgumentException(sprintf('%s is not defined', $platform));
         }
 
         return $instance->{$platform}($params);
