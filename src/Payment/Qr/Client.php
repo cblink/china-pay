@@ -8,6 +8,9 @@ use Cblink\ChinaPay\PaymentConst;
 /**
  * Class Client
  * @package Cblink\ChinaPay\Payment\Qr
+ * @method array wx($params)
+ * @method array alipay($params)
+ * @method array union($params)
  */
 class Client extends BaseClient
 {
@@ -79,5 +82,14 @@ class Client extends BaseClient
         $params['instMid'] = PaymentConst::MID_QRPAY;
 
         return $this->request(PaymentConst::URL_QR_PAY_QUERY, $params);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (in_array($name, ['wx', 'alipay', 'union'])) {
+            return call_user_func([$this, 'order'], $arguments);
+        }
+
+        throw new \InvalidArgumentException();
     }
 }

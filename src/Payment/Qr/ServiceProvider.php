@@ -7,8 +7,6 @@ use Pimple\ServiceProviderInterface;
 
 class ServiceProvider implements ServiceProviderInterface
 {
-
-
     public function register(Container $pimple)
     {
         $pimple['qr'] = function($app){
