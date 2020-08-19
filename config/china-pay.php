@@ -18,6 +18,8 @@ return [
     'tid' => '',
     'app_id' => '',
     'app_key' => '',
+    // 通讯密钥
+    'secret' => '',
     // 日志配置
     'log' => [
         'name' => 'china-pay',

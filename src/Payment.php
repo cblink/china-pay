@@ -1,11 +1,14 @@
 <?php
 namespace Cblink\ChinaPay;
 
+use Closure;
+
 /**
  * Class ChinaPay
  *
- * @property \Cblink\ChinaPay\Payment\Base\Base               $base
+ * @property \Cblink\ChinaPay\Payment\Base\Base                 $base
  * @property \Cblink\ChinaPay\Payment\Base\AccessToken          $access_token   支付的token
+ * @property \Symfony\Component\HttpFoundation\Request          $request
  *
  * @property \Cblink\ChinaPay\Payment\Qr\Client                 $qr             扫码支付
  * @property \Cblink\ChinaPay\Payment\H5\Client                 $h5             h5支付
@@ -32,6 +35,28 @@ class Payment extends Application
         Payment\Mini\ServiceProvider::class,
         Payment\App\ServiceProvider::class,
     ];
+
+    /**
+     * 支付回调
+     *
+     * @param Closure $closure
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handlePaidNotify(Closure $closure)
+    {
+        return (new Notify($this))->handle($closure);
+    }
+
+    /**
+     * 退款回调
+     *
+     * @param Closure $closure
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handleRefundedNotify(Closure $closure)
+    {
+        return (new Notify($this))->handle($closure);
+    }
 
     public function __call($name, $arguments)
     {
