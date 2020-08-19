@@ -42,6 +42,7 @@ class Application extends Container
             Providers\LogServiceProvider::class,
             Providers\CacheServiceProvider::class,
             Providers\HttpClientServiceProvider::class,
+            Providers\RequestServiceProvider::class,
         ], $this->providers);
 
         foreach ($providers as $provider){

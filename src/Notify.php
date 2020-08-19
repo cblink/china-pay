@@ -20,7 +20,7 @@ class Notify
 
     public function handle(Closure $closure)
     {
-        $data = $this->app->request->request->all();
+        parse_str($this->app->request->getContent(), $data);
 
         if (!$this->validate($data)) {
             throw new InvalidArgumentException();
@@ -50,6 +50,6 @@ class Notify
 
         $signStr = urldecode(http_build_query($data)) . $this->app->config->get('secret');
 
-        return $sign == md5($signStr);
+        return $sign == strtoupper(md5($signStr));
     }
 }
