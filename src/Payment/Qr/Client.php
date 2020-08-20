@@ -8,12 +8,45 @@ use Cblink\ChinaPay\PaymentConst;
 /**
  * Class Client
  * @package Cblink\ChinaPay\Payment\Qr
- * @method array wx($params)
- * @method array alipay($params)
- * @method array union($params)
  */
 class Client extends BaseClient
 {
+    /**
+     * @param $params
+     * @return array
+     * @throws \Cblink\ChinaPay\Payment\Exceptions\PaymentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function wx($params)
+    {
+        return $this->order($params);
+    }
+
+    /**
+     * @param $params
+     * @return array
+     * @throws \Cblink\ChinaPay\Payment\Exceptions\PaymentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function alipay($params)
+    {
+        return $this->order($params);
+    }
+
+    /**
+     * @param $params
+     * @return array
+     * @throws \Cblink\ChinaPay\Payment\Exceptions\PaymentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function union($params)
+    {
+        return $this->order($params);
+    }
+
     /**
      * @param $params
      * @return array
@@ -82,14 +115,5 @@ class Client extends BaseClient
         $params['instMid'] = PaymentConst::MID_QRPAY;
 
         return $this->request(PaymentConst::URL_QR_PAY_QUERY, $params);
-    }
-
-    public function __call($name, $arguments)
-    {
-        if (in_array($name, ['wx', 'alipay', 'union'])) {
-            return call_user_func([$this, 'order'], $arguments);
-        }
-
-        throw new \InvalidArgumentException();
     }
 }
